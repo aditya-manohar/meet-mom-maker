@@ -39,6 +39,7 @@ button {
     transition: background-color 0.2s ease;
     width: 100%;
     text-align: center;
+    margin-bottom: 8px;
 }
 
 button:hover {
@@ -47,6 +48,11 @@ button:hover {
 
 button:active {
     background-color: #2c5282;
+}
+
+button:disabled {
+    background-color: #a0aec0;
+    cursor: not-allowed;
 }
 
 .participants-container {
@@ -87,7 +93,7 @@ pre {
     word-wrap: break-word;
     border: 1px solid #e2e8f0;
     padding: 12px;
-    max-height: 250px;
+    max-height: 200px;
     overflow-y: auto;
     background-color: #fff;
     border-radius: 6px;
