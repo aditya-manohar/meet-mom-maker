@@ -4,79 +4,72 @@
 <head>
     <title>Meet MoM</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
     <div class="app-container">
-        <div class="particles-background" id="particles-js"></div>
-
-        <header class="glass-header">
+        <header class="app-header">
             <div class="logo-container">
                 <div class="logo-icon">
-                    <i class="fas fa-clipboard-list"></i>
+                    <i class="fas fa-clipboard-check"></i>
                 </div>
-                <h2>Meet <span class="gradient-text">MoM</span></h2>
+                <h2>Meet <span>Minutes</span></h2>
             </div>
-            <div class="status-pulse">
+            <div class="status-indicator">
                 <p id="status">Ready</p>
-                <div class="pulse-dot"></div>
+                <div class="status-dot"></div>
             </div>
         </header>
 
-        <div class="action-bar glass-panel">
-            <button id="fetchCaptions" class="holographic-btn" title="Fetch Captions">
+        <div class="action-bar">
+            <button id="fetchCaptions" class="action-btn" title="Fetch Captions">
                 <i class="fas fa-broadcast-tower"></i>
-                <span class="btn-tooltip">Fetch Captions</span>
+                <span class="btn-label">Fetch</span>
             </button>
-            <button id="downloadCaptions" class="holographic-btn" title="Download Captions" disabled>
+            <button id="downloadCaptions" class="action-btn" title="Download Captions" disabled>
                 <i class="fas fa-download"></i>
-                <span class="btn-tooltip">Download Captions</span>
+                <span class="btn-label">Download</span>
             </button>
-            <button id="generateMoM" class="holographic-btn" title="Generate MoM" disabled>
+            <button id="generateMoM" class="action-btn" title="Generate MoM" disabled>
                 <i class="fas fa-file-alt"></i>
-                <span class="btn-tooltip">Generate MoM</span>
+                <span class="btn-label">Generate</span>
             </button>
-            <button id="downloadMoM" class="holographic-btn" title="Download MoM" disabled>
-                <i class="fas fa-download"></i>
-                <span class="btn-tooltip">Download MoM</span>
+            <button id="downloadMoM" class="action-btn primary" title="Download MoM" disabled>
+                <i class="fas fa-file-download"></i>
+                <span class="btn-label">MoM</span>
             </button>
         </div>
 
         <div class="content-container">
-            <div class="content-section glass-panel expandable">
+            <div class="content-section">
                 <div class="section-header">
                     <h3><i class="fas fa-users"></i> Participants</h3>
-                    <i class="fas fa-chevron-down toggle-icon"></i>
                 </div>
                 <div id="participantsOutput" class="participants-container"></div>
             </div>
 
-            <div class="content-section glass-panel expandable">
+            <div class="content-section">
                 <div class="section-header">
-                    <h3><i class="fas fa-comment-dots"></i> Captions</h3>
-                    <i class="fas fa-chevron-down toggle-icon"></i>
+                    <h3><i class="fas fa-comment-dots"></i> Meeting Transcript</h3>
                 </div>
                 <pre id="captionOutput" class="content-output"></pre>
             </div>
 
-            <div class="content-section glass-panel expandable">
+            <div class="content-section">
                 <div class="section-header">
                     <h3><i class="fas fa-file-contract"></i> Minutes of Meeting</h3>
-                    <i class="fas fa-chevron-down toggle-icon"></i>
                 </div>
                 <pre id="momOutput" class="content-output"></pre>
             </div>
         </div>
 
-        <div class="floating-notification" id="notification">
+        <div class="notification" id="notification">
             <div class="notification-content"></div>
         </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script src="popup.js"></script>
 </body>
 
