@@ -2,11 +2,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const statusEl = document.getElementById('status');
     const fetchBtn = document.getElementById('fetchCaptions');
     const generateBtn = document.getElementById('generateMoM');
+    const downloadCaptionsBtn = document.getElementById('downloadCaptions');
+    const downloadMoMBtn = document.getElementById('downloadMoM');
     const participantsOutput = document.getElementById('participantsOutput');
     const captionOutput = document.getElementById('captionOutput');
     const momOutput = document.getElementById('momOutput');
 
-    if (!statusEl || !fetchBtn || !generateBtn || !participantsOutput || !captionOutput || !momOutput) {
+    if (!statusEl || !fetchBtn || !generateBtn || !downloadCaptionsBtn || !downloadMoMBtn || !participantsOutput || !captionOutput || !momOutput) {
         console.error('Popup elements missing.');
         return;
     }
@@ -41,8 +43,25 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
                 captionOutput.textContent = response.results;
                 generateBtn.disabled = false;
+                downloadCaptionsBtn.disabled = false;
             }
         });
+    });
+
+    downloadCaptionsBtn.addEventListener('click', () => {
+        const captions = captionOutput.textContent;
+        if (!captions) {
+            statusEl.textContent = 'No captions to download.';
+            return;
+        }
+        const blob = new Blob([captions], { type: 'text/plain' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `Meet_Captions_${new Date().toISOString().split('T')[0]}.txt`;
+        a.click();
+        URL.revokeObjectURL(url);
+        statusEl.textContent = 'Captions downloaded.';
     });
 
     async function generateMoMWithRetry(prompt, maxRetries = 3, initialDelay = 30000) {
@@ -110,10 +129,27 @@ ${captions}`;
             const momText = await generateMoMWithRetry(prompt);
             momOutput.textContent = momText;
             await navigator.clipboard.writeText(momText);
+            downloadMoMBtn.disabled = false;
             statusEl.textContent = 'MoM generated and copied to clipboard!';
         } catch (err) {
             console.error('MoM generation error:', err.message);
             statusEl.textContent = `Failed to generate MoM: ${err.message}`;
         }
+    });
+
+    downloadMoMBtn.addEventListener('click', () => {
+        const momText = momOutput.textContent;
+        if (!momText) {
+            statusEl.textContent = 'No MoM to download.';
+            return;
+        }
+        const blob = new Blob([momText], { type: 'text/markdown' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `MoM_${new Date().toISOString().split('T')[0]}.md`;
+        a.click();
+        URL.revokeObjectURL(url);
+        statusEl.textContent = 'MoM downloaded.';
     });
 });
